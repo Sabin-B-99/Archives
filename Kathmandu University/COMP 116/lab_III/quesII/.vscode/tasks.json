@@ -1,0 +1,34 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "g++",
+			"args": [
+				"main.cpp",
+				"m_string.cpp",
+				"m_string.hpp",
+				"-o",
+				"${workspaceFolderBasename}.exe"
+			],
+			"options": {
+				"cwd": "C:\\MinGW\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"detail": "compiler: C:\\MinGW\\bin\\g++.exe"
+		},
+		{
+			"label": "run",
+			"type": "shell",
+			"command": "./${workspaceFolderBasename}",
+			"dependsOn": [
+				"build"
+			],
+			"problemMatcher": []
+		}
+	]
+
+}

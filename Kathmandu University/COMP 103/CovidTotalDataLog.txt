@@ -1,0 +1,114 @@
+************Newer data appended Below****************
+************************************************************
+Region: China
+Total Cases: 369
+Active Cases: 123
+Recovered Cases: 123
+Death Cases: 123
+Last Updated at: Mon May 18 21:47:39 2020
+
+*************************************************************
+************************************************************
+Region: Nepal
+Total Cases: 3702
+Active Cases: 1234
+Recovered Cases: 1234
+Death Cases: 1234
+Last Updated at: Mon May 18 21:47:39 2020
+
+*************************************************************
+************************************************************
+Region: India
+Total Cases: 37035
+Active Cases: 12345
+Recovered Cases: 12345
+Death Cases: 12345
+Last Updated at: Mon May 18 21:47:39 2020
+
+*************************************************************
+************Newer data appended Below****************
+************************************************************
+Region: China
+Total Cases: 369
+Active Cases: 123
+Recovered Cases: 123
+Death Cases: 123
+Last Updated at: Mon May 18 21:54:15 2020
+
+*************************************************************
+************************************************************
+Region: India
+Total Cases: 369
+Active Cases: 123
+Recovered Cases: 123
+Death Cases: 123
+Last Updated at: Mon May 18 21:54:15 2020
+
+*************************************************************
+************Newer data appended Below****************
+************************************************************
+Region: Nepal
+Total Cases: 3702
+Active Cases: 1234
+Recovered Cases: 1234
+Death Cases: 1234
+Last Updated at: Mon May 18 21:59:57 2020
+
+*************************************************************
+************Newer data appended Below****************
+************************************************************
+Region: Nepal
+Total Cases: 488
+Active Cases: 134
+Recovered Cases: 123
+Death Cases: 231
+Last Updated at: Tue May 19 12:55:21 2020
+
+*************************************************************
+************************************************************
+Region: ø(˜
+Total Cases: 0
+Active Cases: 0
+Recovered Cases: 0
+Death Cases: 0
+Last Updated at: Tue May 19 12:55:21 2020
+
+*************************************************************
+************Newer data appended Below****************
+************************************************************
+Region: China
+Total Cases: 369
+Active Cases: 123
+Recovered Cases: 123
+Death Cases: 123
+Last Updated at: Tue May 19 17:27:32 2020
+
+*************************************************************
+************Newer data appended Below****************
+************************************************************
+Region: China
+Total Cases: 369
+Active Cases: 123
+Recovered Cases: 123
+Death Cases: 123
+Last Updated at: Tue May 19 17:28:06 2020
+
+*************************************************************
+************************************************************
+Region: Nepal
+Total Cases: 369
+Active Cases: 123
+Recovered Cases: 123
+Death Cases: 123
+Last Updated at: Tue May 19 17:28:06 2020
+
+*************************************************************
+************************************************************
+Region: India
+Total Cases: 369
+Active Cases: 123
+Recovered Cases: 123
+Death Cases: 123
+Last Updated at: Tue May 19 17:28:06 2020
+
+*************************************************************

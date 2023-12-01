@@ -1,0 +1,9 @@
+//hmm intresting
+    // String name = "sabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabinsabin";
+
+    // int count = 0;
+    // while(*name != '\0'){
+    //     count++;
+    //     name++;
+    // }
+    // printf(" %d\n", count);

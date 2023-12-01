@@ -1,0 +1,6 @@
+standardDeviation.c
+char.c
+toBinary.c
+mergeSort
+separateWords.c
+Buggy: HashTableII.c and HasTableIII.c

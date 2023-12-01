@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "*.ejs": "html",
+    "stdbool.h": "c",
+    "fcfs.h": "c",
+    "ready_queue.h": "c",
+    "stdint.h": "c",
+    "fcfs_calc.h": "c",
+    "queue": "c",
+    "stdio.h": "c",
+    "stdarg.h": "c",
+    "xutility": "c"
+  }
+}
