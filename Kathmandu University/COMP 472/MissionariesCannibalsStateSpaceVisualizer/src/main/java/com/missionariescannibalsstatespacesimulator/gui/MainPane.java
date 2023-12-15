@@ -209,7 +209,7 @@ public class MainPane extends Pane {
         Label label = new Label("View source: ");
         codeSrc.setSpacing(20);
         codeSrc.setAlignment(Pos.CENTER);
-        codeSrc.getChildren().addAll(label, new Hyperlink("https://github.com/Sabin-B-99/MissionariesCannibalsStateSpaceSimulator"));
+        codeSrc.getChildren().addAll(label, new Hyperlink("https://github.com/Sabin-B-99/Archives/tree/main/Kathmandu%20University/COMP%20472/MissionariesCannibalsStateSpaceVisualizer"));
         about.getChildren().addAll(codeSrc, closeAboutMenuBtn);
 
         closeAboutMenuBtn.setOnAction(event -> {
