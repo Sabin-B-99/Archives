@@ -1,4 +1,4 @@
-package com.badalsabin.ai.eightpuzzlebfsdfs.engine;
+package com.ai.eightpuzzlesolver.engine;
 
 import java.util.Arrays;
 

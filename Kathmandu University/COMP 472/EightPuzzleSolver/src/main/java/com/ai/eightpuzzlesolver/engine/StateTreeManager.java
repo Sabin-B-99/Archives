@@ -1,6 +1,9 @@
-package com.badalsabin.ai.eightpuzzlebfsdfs.engine;
+package com.ai.eightpuzzlesolver.engine;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class StateTreeManager {
     private final HashSet<StateTreeNode> exploredNodes = new HashSet<>();
@@ -44,14 +47,12 @@ public class StateTreeManager {
         }
     }
 
-
-    private StateTreeNode applyOperator(int[][] boardStateOriginal, int[] emptyRowCol, EightPuzzleOperators operator){
+    private StateTreeNode applyOperator(int[][] boardStateOriginal, int[] emptyRowCol,
+                                        EightPuzzleOperators operator){
         int emptyRowPos = emptyRowCol[0];
         int emptyColPos = emptyRowCol[1];
-
         int[][] boardState = Arrays.stream(boardStateOriginal)
                 .map(int[]::clone).toArray(int[][]::new);
-
         try {
             if(emptyRowPos != -1 && emptyColPos != -1){
                 if(operator == EightPuzzleOperators.R){
@@ -74,6 +75,79 @@ public class StateTreeManager {
         return new StateTreeNode(new Board(boardState));
     }
 
+
+    private int getManhattanHeuristicCost(int[][] currentState, int[][] goalState){
+        int[][] gridArray = Arrays.stream(currentState)
+                .map(int[]::clone).toArray(int[][]::new);
+        int[][] goalArray = Arrays.stream(goalState)
+                .map(int[]::clone).toArray(int[][]::new);
+        int hCost = 0;
+
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                int currentChar = gridArray[row][col];
+                for (int goalStateRow = 0; goalStateRow < 3; goalStateRow++) {
+                    for (int goalStateCol = 0; goalStateCol < 3; goalStateCol++) {
+                        if (goalArray[goalStateRow][goalStateCol] == currentChar) {
+                            hCost = hCost + (Math.abs(row - goalStateRow) + Math.abs(col - goalStateCol));
+                        }
+                    }
+                }
+            }
+        }
+        return hCost;
+    }
+
+    private int getNumberOfMisplacedTilesHeuristicsCost(int[][] currentState, int[][] goalState){
+        int cost = 0;
+        for(int row = 0; row < currentState.length; row++){
+            for (int col=0; col < currentState.length; col++){
+                if(currentState[row][col] != goalState[row][col]){
+                    cost++;
+                }
+            }
+        }
+        return cost;
+    }
+
+    public void generateStateSpaceTreeAStar(StateTreeNode rootNode, char heuristicFlag){
+        Queue<StateTreeNode> openQueue = new LinkedList<>();
+        openQueue.add(rootNode);
+        while (!openQueue.isEmpty()){
+            StateTreeNode temp = openQueue.poll();
+            if(temp != null){
+                applyOperators(temp);
+                openQueue.add(childWithLeastCost(temp, heuristicFlag));
+            }
+            if(puzzleSolved){
+                break;
+            }
+        }
+    }
+
+    private StateTreeNode childWithLeastCost(StateTreeNode parent, char heuristicFLag) {
+        StateTreeNode childWithLeastCost = null;
+        int childWithLeastCostIndex = 0;
+        int leastCost = Integer.MAX_VALUE;
+        int currentChildCost;
+        for (StateTreeNode child: parent.getChildren()) {
+            if(child != null){
+                if(heuristicFLag == 'm'){
+                    currentChildCost = getManhattanHeuristicCost(child.getCurrentBoardState().getState(),
+                        finalState.getCurrentBoardState().getState());
+                }else{
+                     currentChildCost = getNumberOfMisplacedTilesHeuristicsCost(child.getCurrentBoardState().getState(),
+                        finalState.getCurrentBoardState().getState());
+                }
+                if(currentChildCost < leastCost){
+                    leastCost = currentChildCost;
+                    childWithLeastCost = parent.getChildren().get(childWithLeastCostIndex);
+                }
+            }
+            childWithLeastCostIndex++;
+        }
+        return childWithLeastCost;
+    }
 
     public void generateStateSpaceTreeDFS(StateTreeNode rootNode){
         StateTreeNode currentNode = null;

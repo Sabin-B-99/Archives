@@ -1,4 +1,4 @@
-package com.badalsabin.ai.eightpuzzlebfsdfs.engine;
+package com.ai.eightpuzzlesolver.engine;
 
 public class EngineMain {
     public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class EngineMain {
         StateTreeNode finalStateNode = new StateTreeNode(new Board(finalState));
 
         StateTreeManager stateTreeManager = new StateTreeManager(finalStateNode);
-        stateTreeManager.generateStateSpaceTreeBFS(initialStateNode);
+        stateTreeManager.generateStateSpaceTreeAStar(initialStateNode, 'm');
         stateTreeManager.printChildState(initialStateNode);
     }
 }

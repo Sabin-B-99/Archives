@@ -1,7 +1,7 @@
-package com.badalsabin.ai.eightpuzzlebfsdfs.gui;
+package com.ai.eightpuzzlesolver.gui;
 
-import com.badalsabin.ai.eightpuzzlebfsdfs.engine.StateTreeManager;
-import com.badalsabin.ai.eightpuzzlebfsdfs.engine.StateTreeNode;
+import com.ai.eightpuzzlesolver.engine.StateTreeManager;
+import com.ai.eightpuzzlesolver.engine.StateTreeNode;
 import javafx.scene.paint.Color;
 
 import java.util.HashMap;
@@ -21,9 +21,11 @@ public class GUITreeGenerator {
 
     private final String method;
 
+    private final String heuristic;
+
     private String stateReachingPath;
 
-    public GUITreeGenerator(StateTreeNode initialState, StateTreeNode finalState, String method) {
+    public GUITreeGenerator(StateTreeNode initialState, StateTreeNode finalState, String method, String heuristic) {
         this.initialState = initialState;
         this.finalState = finalState;
         String rootStateText = stateText(initialState);
@@ -31,10 +33,14 @@ public class GUITreeGenerator {
         this.treeRoot = new Tree(new CircleWithText(rootStateText, rootNodeColor));
         this.stateTreeManager = new StateTreeManager(finalState);
         this.method = method;
+        this.heuristic = heuristic;
     }
 
     public synchronized void generateStateSpace(){
-        if(method.equalsIgnoreCase("dfs")){
+        if(method.equalsIgnoreCase("A*")){
+            char heuristicFlag = (heuristic.equals("manhtnDist")) ? 'm' : 'n';
+            stateTreeManager.generateStateSpaceTreeAStar(initialState, heuristicFlag);
+        } else if(method.equalsIgnoreCase("dfs")){
             stateTreeManager.generateStateSpaceTreeDFS(initialState);
         }else if(method.equalsIgnoreCase("bfs")) {
             stateTreeManager.generateStateSpaceTreeBFS(initialState);

@@ -1,8 +1,11 @@
-package com.badalsabin.ai.eightpuzzlebfsdfs.gui;
+package com.ai.eightpuzzlesolver.gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -67,9 +70,7 @@ public final class TreeDisplayPane extends Pane {
         Tree currentTreeNode = windowManager.getGuiTreeGenerator().getTreeRoot();
 
 
-        if(windowManager.getGuiTreeGenerator().getMethod().equalsIgnoreCase("bfs")){
-            calculateNodePosInSceneAndAddToLinkedListBFS(currentTreeNode);
-        }else if (windowManager.getGuiTreeGenerator().getMethod().equalsIgnoreCase("dfs")){
+         if (windowManager.getGuiTreeGenerator().getMethod().equalsIgnoreCase("dfs")){
             calculateNodePosInSceneAndAddToLinkedListDFS(currentTreeNode);
         }else{
             calculateNodePosInSceneAndAddToLinkedListBFS(currentTreeNode);

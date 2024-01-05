@@ -1,7 +1,7 @@
-package com.badalsabin.ai.eightpuzzlebfsdfs.gui;
+package com.ai.eightpuzzlesolver.gui;
 
-import com.badalsabin.ai.eightpuzzlebfsdfs.engine.Board;
-import com.badalsabin.ai.eightpuzzlebfsdfs.engine.StateTreeNode;
+import com.ai.eightpuzzlesolver.engine.Board;
+import com.ai.eightpuzzlesolver.engine.StateTreeNode;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -13,7 +13,8 @@ import javafx.scene.text.Text;
 
 public final class InputPane extends Pane {
     private final Button run;
-    private final ToggleGroup toggleGroup;
+    private final ToggleGroup solnMethodToggleGroup;
+    private final ToggleGroup aStarheuristicToggleGroup;
     private final GridPane initialStateInputGrids;
     private final GridPane finalStateInputGrids;
 
@@ -24,7 +25,8 @@ public final class InputPane extends Pane {
 
     private InputPane() {
         this.run = new Button("Run");
-        this.toggleGroup = new ToggleGroup();
+        this.solnMethodToggleGroup = new ToggleGroup();
+        this.aStarheuristicToggleGroup = new ToggleGroup();
         this.initialStateInputGrids = new GridPane();
         this.finalStateInputGrids = new GridPane();
     }
@@ -48,9 +50,15 @@ public final class InputPane extends Pane {
         inputGridHBox.setPadding(new Insets(5,5,5,5));
         inputGridHBox.setSpacing(35);
         inputGridHBox.getChildren().addAll(initialStateInputGrids, finalStateInputGrids, instructionPane);
+
+
+        VBox heuristicsAndOptionsVBox = new VBox();
+        heuristicsAndOptionsVBox.getChildren().addAll(getHeuristicsOptionPane(), getOptionsPane());
+
         VBox inputGridPane = new VBox();
         inputGridPane.setSpacing(10);
-        inputGridPane.getChildren().addAll(inputGridHBox, getOptionsPane());
+        inputGridPane.getChildren().addAll(inputGridHBox, heuristicsAndOptionsVBox);
+
         return inputGridPane;
     }
 
@@ -124,32 +132,65 @@ public final class InputPane extends Pane {
         }
      }
 
+     private HBox getHeuristicsOptionPane(){
+        HBox heuristics = new HBox();
+
+        RadioButton manhattanDistance = new RadioButton("manhtnDist");
+        manhattanDistance.setToggleGroup(aStarheuristicToggleGroup);
+        manhattanDistance.setSelected(true);
+
+        RadioButton numberOfMisplacedTiles = new RadioButton("numOfMisTiles");
+        numberOfMisplacedTiles.setToggleGroup(aStarheuristicToggleGroup);
+
+        heuristics.getChildren().addAll(new Label("Heuristics") ,manhattanDistance, numberOfMisplacedTiles);
+
+        heuristics.setPadding(new Insets(3));
+        heuristics.setSpacing(5);
+        return heuristics;
+
+     }
+
      private HBox getOptionsPane(){
         HBox options = new HBox();
 
+        RadioButton aStarRadioButton = new RadioButton("A*");
+        aStarRadioButton.setToggleGroup(solnMethodToggleGroup);
+        aStarRadioButton.setSelected(true);
+
+        aStarRadioButton.selectedProperty()
+                .addListener( (observable, oldVal, newVal) ->{
+                        aStarheuristicToggleGroup.getToggles().forEach(
+                                (toggle -> {
+                                    ((Node) toggle).setDisable(!newVal);
+                                })
+                        );
+                });
+
         RadioButton bfsRadioButton = new RadioButton("bfs");
-        bfsRadioButton.setToggleGroup(toggleGroup);
-        bfsRadioButton.setSelected(true);
+        bfsRadioButton.setToggleGroup(solnMethodToggleGroup);
 
         RadioButton idsRadioButton = new RadioButton("ids");
-        idsRadioButton.setToggleGroup(toggleGroup);
+        idsRadioButton.setToggleGroup(solnMethodToggleGroup);
 
         RadioButton dfsRadioButton = new RadioButton("dfs");
-        dfsRadioButton.setToggleGroup(toggleGroup);
+        dfsRadioButton.setToggleGroup(solnMethodToggleGroup);
 
-        options.getChildren().addAll(run, bfsRadioButton, idsRadioButton, dfsRadioButton);
+        options.getChildren().addAll(run, new Label("Solution Method: ") ,aStarRadioButton, bfsRadioButton, idsRadioButton, dfsRadioButton);
 
-        options.setPadding(new Insets(15));
+        options.setPadding(new Insets(3));
         options.setSpacing(5);
         return options;
      }
 
      private void addRunButtonEventHandler(){
          run.setOnAction(e->{
-             RadioButton selectedButton = (RadioButton) toggleGroup.getSelectedToggle();
+             RadioButton selectedButton = (RadioButton) solnMethodToggleGroup.getSelectedToggle();
+             RadioButton selectedHeuristics = (RadioButton) aStarheuristicToggleGroup.getSelectedToggle();
+
              StateTreeNode initialState = new StateTreeNode(new Board(extractInputValues(initialStateInputGrids)));
              StateTreeNode finalState = new StateTreeNode(new Board(extractInputValues(finalStateInputGrids)));
-             GUITreeGenerator guiTreeGenerator = new GUITreeGenerator(initialState, finalState, selectedButton.getText());
+             GUITreeGenerator guiTreeGenerator = new GUITreeGenerator(initialState, finalState, selectedButton.getText(),
+                     selectedHeuristics.getText());
              windowManager.setGuiTreeGenerator(guiTreeGenerator);
          });
      }

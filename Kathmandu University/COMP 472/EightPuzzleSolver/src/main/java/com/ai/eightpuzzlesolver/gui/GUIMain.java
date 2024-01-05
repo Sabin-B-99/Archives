@@ -1,4 +1,4 @@
-package com.badalsabin.ai.eightpuzzlebfsdfs.gui;
+package com.ai.eightpuzzlesolver.gui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
